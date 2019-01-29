@@ -12,8 +12,7 @@ const NavBarMenu = (props) =>   {
         return (
             <React.Fragment>
                 <NavbarToggler onClick={props.onClick}/>
-                <NavbarBrand className="mr-auto" href="/">Ristorante Con Fusion</NavbarBrand>
-
+                <NavbarBrand className="mr-auto" href="/">Politicians</NavbarBrand>
                 <img src={logo} height="30" width="30" alt="logo"/>
                 <Collapse isOpen={props.isOpen} navbar>
                     <Nav navbar>
@@ -23,20 +22,16 @@ const NavBarMenu = (props) =>   {
                             </NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink className="nav-link" to="/aboutUs">
-                                <span><FontAwesomeIcon icon={faInfo}/>About us</span>
+                            <NavLink className="nav-link" to="/politicians">
+                                <span><FontAwesomeIcon icon={faList}/>Politicians</span>
                             </NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink className="nav-link" to="/menu">
-                                <span><FontAwesomeIcon icon={faList}/>Menu</span>
+                            <NavLink className="nav-link" to="/create">
+                                <span><FontAwesomeIcon icon={faList}/>Add politician</span>
                             </NavLink>
                         </NavItem>
-                        <NavItem>
-                            <NavLink className="nav-link" to="/contactus">
-                                <span><FontAwesomeIcon icon={faAddressCard}/>Contact</span>
-                            </NavLink>
-                        </NavItem>
+
 
                     </Nav>
                 </Collapse>

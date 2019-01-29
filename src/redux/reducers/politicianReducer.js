@@ -3,10 +3,10 @@ import {Politicians} from "../../shared/politicians";
 
 export  const initialState = {
     isLoading: true,
-    dishes: [],
+    politicians: [],
     error: undefined
 };
-export const Dishes = (state = initialState, action) => {
+export const PoliticianReducer = (state = initialState, action) => {
     switch (action.type) {
         case ActionTypes.FETCH:
             return {...state, ...action.payload};

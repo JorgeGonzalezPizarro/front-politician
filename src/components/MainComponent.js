@@ -6,24 +6,25 @@ import Menu from "./Functional components/MenuComponent";
 import Footer from "./Footer/Footer";
 import {Switch, Route, Redirect, withRouter} from "react-router-dom";
 import Home from "./Home/Home";
-import {RenderDish} from "./Functional components/DishDetail/DishDetailRouter";
+import {RenderPolitician} from "./Functional components/DishDetail/DishDetailRouter";
 import Contact from "./Pages/Contact";
-import About from "./Pages/AboutUs";
 
-import {addComments, removeComment} from '../redux/ActionCreators/Comments/ActionCreators';
-import {fetchDishes} from '../redux/ActionCreators/Dishes/ActionCreators';
+import {addPolitician , update} from '../redux/ActionCreators/Command/ActionCreators';
+import {fetchPoliticians} from '../redux/ActionCreators/Fetch/ActionCreators';
+import {Loading} from "./Functional components/LoadingComponent";
+import {CreatePolitician} from "./Politician/Functional/CreatePolitician";
 
 
 export const mapStateToProps = (state) => {
-    return {dishes: state.dishes, comments: state.comments, promotions: state.promotions, leaders: state.leaders}
+    return {politicians: state.politicians, pagination: state.politicians.pagination, promotions: state.promotions, leaders: state.leaders}
 };
 
 
 export const mapDispatchToProps = (dispatch) => ({
-    addComment: (dishId, rating, author, comment) => dispatch(addComments(dishId, rating, author, comment)),
-    fetchDishes: () => {dispatch(fetchDishes())
-    },
-    removeComment: (comment) => dispatch(removeComment(comment))
+    addPolitician: (...politician) => dispatch(addPolitician(politician)),
+    update: (...politician) => dispatch(update(politician)),
+    fetchPolitician: () => {dispatch(fetchPoliticians())
+    }
 });
 
 
@@ -31,61 +32,46 @@ export class Main extends Component {
     constructor(props) {
         super(props);
         this.state= {
-            dishes: props.dishes,
+            dishes: props.politicians,
             ...props
         }
     }
 
     componentDidMount() {
-        console.log("a" , this.props);
-        return this.props.fetchDishes();
+        console.log("a2 " ,this.props);
+        return this.props.fetchPolitician();
     }
 
 
     render() {
         const actions = {
-            addComment: this.props.addComment,
-            removeComment: this.props.removeComment
+            addPolitician: this.props.addPolitician,
         }
-        console.log("a2" , this.props);
 
         const HomePage = () => {
             return (
-                <Home
-                    dish={this.props.dishes.dishes.filter((dishFeatured) =>  dishFeatured.titular)[0]}
-                    promotion={this.props.promotions.filter((promotionFeatured) => promotionFeatured.featured)[0]}
-                    leaders={this.props.leaders.filter((leadersFeatured) => leadersFeatured.featured)[0]}
-                />)
+                <Home politicians={this.props.politicians}/>)
         };
-
-
-        const DishDetailRouter = ({match, actions}) => {
-
+        const PoliticianRouter = ({match, actions}) => {
+            if(this.props.politicians.isLoading)
+            {
+                return <Loading/>
+            }
             return (
-
-                <RenderDish dish={this.props.dishes.dishes.filter((dish, key) => dish.id === parseInt(match.params.id))[0]}
-                            actions={actions}
-                            comments={this.props.comments.filter((comments) => comments.dishId === parseInt(match.params.id))}/>
+                <RenderPolitician politician={this.props.politicians.politicians.filter((politician, key) => politician.id === match.params.id)[0]} actions={actions}/>
             )
         };
-
 
         return (
             <div>
                 <Header/>
                 <Switch>
-                    <Route  exact path={["/", "/home"]} component={HomePage}
-                           dish={this.props.dishes.dishes.filter((dishFeatured) => dishFeatured.featured)[0]}
-                           promotion={this.props.promotions.filter((promotionFeatured) => promotionFeatured.featured)[0]}
-                           leaders={this.props.promotions.filter((leadersFeatured) => leadersFeatured.featured)[0]
-                           }/>
-                    <Route exact path={"/menu/:id"}
-                           component={({match}) => <DishDetailRouter match={match} actions={actions}/>}/>
-
-                    <Route exact path={"/menu"} component={() => <Menu dishes={this.props.dishes.dishes}/>}/>
-                    <Route exact path={"/aboutUs"} component={() => <About leaders={this.props.leaders}/>}/>
+                    <Route  exact path={["/politicians", "/home" , '/']} component={HomePage}
+                            politicians={this.props.politicians.politicians} pagination={this.props.pagination}/>
+                    <Route exact path={"/politician/:id"}
+                           component={({match}) => <PoliticianRouter match={match} actions={actions}/>}/>
                     <Route exact path={'/contactus'} component={Contact}/>} />
-
+                    <Route exact path={'/create'} component={CreatePolitician}/>} />
                     <Redirect to={"/home"}/>
                 </Switch>
 

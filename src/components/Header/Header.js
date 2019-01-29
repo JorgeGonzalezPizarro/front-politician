@@ -20,7 +20,7 @@ export default class Header extends Component {
     render() {
         return(
           <React.Fragment>
-              <Navbar dark color="primary" expand="md">
+              <Navbar dark color="#00c4a3" expand="md">
                   <div className="container">
                       <NavBarMenu onClick = {this.toggleNavBar} isOpen={this.state.isNavOpen}/>
                   </div>
@@ -29,8 +29,8 @@ export default class Header extends Component {
               <div className="container">
                   <div className="row row-header">
                       <div className="col-12 col-sm-6">
-                          <h1>Ristorante con Fusion</h1>
-                          <p>We take inspiration from the World's best cuisines, and create a unique fusion experience. Our lipsmacking creations will tickle your culinary senses!</p>
+                          <h1>Politicians </h1>
+                          <p>Politician web site </p>
                       </div>
                   </div>
               </div>

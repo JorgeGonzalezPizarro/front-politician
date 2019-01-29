@@ -1,5 +1,5 @@
 import {createStore , combineReducers , applyMiddleware} from 'redux';
-import {Dishes} from "./reducers/dishes";
+import {PoliticianReducer} from "./reducers/politicianReducer";
 import {Comments} from "./reducers/comments";
 import {Leaders} from "./reducers/leaders";
 import {Promotions} from "./reducers/promotions";
@@ -9,7 +9,8 @@ import logger from "redux-logger";
 export const ConfigureStore = () =>{
     return createStore(
         combineReducers({
-            dishes:Dishes,
+            politicians:PoliticianReducer,
+            pagination:PoliticianReducer,
             comments: Comments,
             leaders: Leaders,
             promotions: Promotions

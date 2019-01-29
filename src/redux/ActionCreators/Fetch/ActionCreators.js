@@ -1,40 +1,37 @@
 import * as ActionTypes from '../../ActionTypes/Dishes/Actions'
 import {Politicians} from '../../../shared/politicians'
-import {initialState} from "../../reducers/dishes";
+import {initialState} from "../../reducers/politicianReducer";
 import axios from 'axios';
 
-export const fetchDishes = () => (dispatch) => {
+export const fetchPoliticians = () => (dispatch) => {
 
     dispatch(dishesLoading());
     dispatch( async () =>{
-      return  axios.get("http://localhost:3001/Politicians")
+      return  axios.get("https://localhost/vhost/api-politicians/public?XDEBUG_SESSION_START=11556&page=1")
             .then((response) => {
                return dispatch(fetch(response.data))}
             );
-
     });
-
 };
 
 export const dishesLoading = () => ({
 
     type: ActionTypes.LOADING,
     payload: {
-        dishes: [],
+        politicians: [],
         error: null,
         isLoading: initialState.isLoading,
     }
 });
 
 
-export const fetch = (dishes) => (
+export const fetch = (politicians) => (
     {
         type: ActionTypes.FETCH,
         payload: {
             isLoading: false,
             error: null,
-            dishes: dishes,
-
+            politicians: politicians,
         }
     }
 );
@@ -44,7 +41,7 @@ export const failed = (error) => ({
     type: ActionTypes.FAILED,
     payload:
         {
-            dishes: initialState.dishes,
+            politicians: initialState.politicians,
             isLoading: false,
             error: error
         }

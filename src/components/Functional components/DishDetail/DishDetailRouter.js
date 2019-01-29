@@ -1,13 +1,9 @@
 import React  from 'react'
-import DishDetail from "./DishdetailComponent";
+import PoliticianDetail from "./DishdetailComponent";
 
-
-
-
-
-export const RenderDish = ({dish,comments,actions}) => {
-    console.log(dish);
-    return <DishDetail dish={dish} comments = {comments} actions={actions} />
+export const RenderPolitician = ({politician,actions}) => {
+    console.log('from renderp' , politician);
+    return <PoliticianDetail politician={politician} actions={actions} />
 };
 
 
