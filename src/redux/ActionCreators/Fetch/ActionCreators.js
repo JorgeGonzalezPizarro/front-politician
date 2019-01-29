@@ -7,7 +7,7 @@ export const fetchPoliticians = () => (dispatch) => {
 
     dispatch(dishesLoading());
     dispatch( async () =>{
-      return  axios.get("https://localhost/vhost/api-politicians/public?XDEBUG_SESSION_START=11556&page=1")
+      return  axios.get("http://localhost/api-politicians/public/index.php?XDEBUG_SESSION_START=11556&page=2")
             .then((response) => {
                return dispatch(fetch(response.data))}
             );
@@ -21,6 +21,8 @@ export const dishesLoading = () => ({
         politicians: [],
         error: null,
         isLoading: initialState.isLoading,
+        pagination: null,
+
     }
 });
 
@@ -31,7 +33,8 @@ export const fetch = (politicians) => (
         payload: {
             isLoading: false,
             error: null,
-            politicians: politicians,
+            politicians: politicians.politicians,
+            pagination: politicians.meta,
         }
     }
 );
@@ -43,7 +46,8 @@ export const failed = (error) => ({
         {
             politicians: initialState.politicians,
             isLoading: false,
-            error: error
+            error: error,
+            pagination: null
         }
 
 });

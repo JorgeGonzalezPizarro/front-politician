@@ -13,10 +13,12 @@ import {addPolitician , update} from '../redux/ActionCreators/Command/ActionCrea
 import {fetchPoliticians} from '../redux/ActionCreators/Fetch/ActionCreators';
 import {Loading} from "./Functional components/LoadingComponent";
 import {CreatePolitician} from "./Politician/Functional/CreatePolitician";
+import {Pagination} from "reactstrap";
+import {PaginationHandler} from "./Home/Pagination";
 
 
 export const mapStateToProps = (state) => {
-    return {politicians: state.politicians, pagination: state.politicians.pagination, promotions: state.promotions, leaders: state.leaders}
+    return {politicians: state.politicians, pagination: state.politicians.pagination}
 };
 
 
@@ -38,8 +40,7 @@ export class Main extends Component {
     }
 
     componentDidMount() {
-        console.log("a2 " ,this.props);
-        return this.props.fetchPolitician();
+         this.props.fetchPolitician();
     }
 
 
@@ -49,8 +50,12 @@ export class Main extends Component {
         }
 
         const HomePage = () => {
+
             return (
-                <Home politicians={this.props.politicians}/>)
+                <div>
+                <Home politicians={this.props.politicians} pagination={this.props.pagination}/>
+                <PaginationHandler  numItems={this.props.politicians.length} pagination={this.props.pagination}/>
+                   </div>);
         };
         const PoliticianRouter = ({match, actions}) => {
             if(this.props.politicians.isLoading)
@@ -61,8 +66,9 @@ export class Main extends Component {
                 <RenderPolitician politician={this.props.politicians.politicians.filter((politician, key) => politician.id === match.params.id)[0]} actions={actions}/>
             )
         };
-
+        console.log(this.props);
         return (
+
             <div>
                 <Header/>
                 <Switch>

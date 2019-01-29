@@ -3,7 +3,7 @@ import {Card, CardBody, CardImg, CardSubtitle, CardText, CardTitle} from "reacts
 import {Loading} from "../Functional components/LoadingComponent";
 import {HomePresentational} from "./Presentational/HomePresentational";
 
-const HomeComponent = ({politicians}) => {
+const HomeComponent = ({politicians , pagination}) => {
     if(politicians.isLoading)
     {
         return <Loading/>
@@ -11,7 +11,7 @@ const HomeComponent = ({politicians}) => {
 
     return(
 
-        <HomePresentational politicians={politicians.politicians}/>
+        <HomePresentational politicians={politicians.politicians} pagination={pagination}/>
     );
 };
 const RenderCard = ({item}) => {

@@ -4,7 +4,8 @@ import {Politicians} from "../../shared/politicians";
 export  const initialState = {
     isLoading: true,
     politicians: [],
-    error: undefined
+    error: undefined,
+    pagination: null
 };
 export const PoliticianReducer = (state = initialState, action) => {
     switch (action.type) {

@@ -4,7 +4,7 @@ import {RenderCardPolitician} from "../../Politician/Presentational/RenderCardPo
 import {Breadcrumb, BreadcrumbItem} from "reactstrap";
 import {Link} from "react-router-dom";
 
-export const HomePresentational = (politicians,onClick) => {
+export const HomePresentational = (politicians) => {
     return(
 
             <div className="container">
