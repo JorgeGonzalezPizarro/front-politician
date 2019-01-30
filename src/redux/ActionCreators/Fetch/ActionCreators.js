@@ -2,19 +2,22 @@ import * as ActionTypes from '../../ActionTypes/Dishes/Actions'
 import {Politicians} from '../../../shared/politicians'
 import {initialState} from "../../reducers/politicianReducer";
 import axios from 'axios';
+import {Routes} from "../../../shared/Politician/Routes";
 
 export const fetchPoliticians = () => (dispatch) => {
 
-    dispatch(dishesLoading());
+    dispatch(loading());
     dispatch( async () =>{
-      return  axios.get("http://localhost/api-politicians/public/index.php?XDEBUG_SESSION_START=11556&page=2")
+        const route = Routes.filter((route) => route.name==='fetch')[0];
+
+      return  axios.get(route.route)
             .then((response) => {
                return dispatch(fetch(response.data))}
             );
     });
 };
 
-export const dishesLoading = () => ({
+export const loading = () => ({
 
     type: ActionTypes.LOADING,
     payload: {

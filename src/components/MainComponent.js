@@ -13,18 +13,17 @@ import {addPolitician , update} from '../redux/ActionCreators/Command/ActionCrea
 import {fetchPoliticians} from '../redux/ActionCreators/Fetch/ActionCreators';
 import {Loading} from "./Functional components/LoadingComponent";
 import {CreatePolitician} from "./Politician/Functional/CreatePolitician";
-import {Pagination} from "reactstrap";
 import {PaginationHandler} from "./Home/Pagination";
 
 
 export const mapStateToProps = (state) => {
-    return {politicians: state.politicians, pagination: state.politicians.pagination}
+    return {politicians: state.politicians, updating: state.updating, pagination: state.politicians.pagination}
 };
 
 
 export const mapDispatchToProps = (dispatch) => ({
-    addPolitician: (...politician) => dispatch(addPolitician(politician)),
-    update: (...politician) => dispatch(update(politician)),
+    addPolitician: (politician) => dispatch(addPolitician(politician)),
+    update: (politician) => dispatch(update(politician)),
     fetchPolitician: () => {dispatch(fetchPoliticians())
     }
 });
@@ -47,7 +46,8 @@ export class Main extends Component {
     render() {
         const actions = {
             addPolitician: this.props.addPolitician,
-        }
+            update: this.props.update,
+        };
 
         const HomePage = () => {
 
@@ -63,10 +63,9 @@ export class Main extends Component {
                 return <Loading/>
             }
             return (
-                <RenderPolitician politician={this.props.politicians.politicians.filter((politician, key) => politician.id === match.params.id)[0]} actions={actions}/>
+                <RenderPolitician  updating ={this.props.updating} politician={this.props.politicians.politicians.filter((politician, key) => politician.id === match.params.id)[0]} actions={actions}/>
             )
         };
-        console.log(this.props);
         return (
 
             <div>

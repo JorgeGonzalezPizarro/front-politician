@@ -1,30 +1,43 @@
-import * as ActionTypes from '../../ActionTypes/Comments/Actions'
-import {dishesLoading, fetch} from "../Fetch/ActionCreators";
+import * as ActionTypesCreate from '../../ActionTypes/Comments/Actions'
+import * as ActionTypes from '../../ActionTypes/Comments/ActionUpdate'
+import {loading, fetch, fetchPoliticians} from "../Fetch/ActionCreators";
 import axios from 'axios';
-import {initialState} from "../../reducers/politicianReducer";
+import {Routes} from "../../../shared/Politician/Routes";
 
-export const create = () => (dispatch) => {
-
+export const create = (data) => (dispatch) => {
+    const route = Routes.filter((route) => route.name==='update')[0];
     dispatch( async () =>{
-        return  axios.post("http://localhost:3001/politicians")
+        return  axios.post(route.route ,Object.assign({},data), {
+            headers: {
+                'Content-Type': 'application/json'
+            }})
                 .then((response) => {
-                    return dispatch(fetch(response.data))}
-                ).catch(
+                    alert(response);
+                    return dispatch(fetch())
+                }).catch(
                         function (error) {
-                            dispatch(failed(error));
+                            dispatch(failedUpdate(error));
                         }
                 );
     });
 };
-export const update = () => (dispatch) => {
-
+export const update = (data) => (dispatch) => {
+    const route = Routes.filter((route) => route.name==='update')[0];
+    dispatch(updating());
+    console.log(data);
     dispatch( async () =>{
-        return  axios.post("http://localhost:3001/politicians")
+        return  axios.put(route.route ,Object.assign({},data), {
+            headers: {
+                'Content-Type': 'application/json'
+            }})
                 .then((response) => {
-                    return dispatch(fetch(response.data))}
-                ).catch(
+                            alert(response);
+                             dispatch(successUpdated())
+                            return dispatch(fetchPoliticians())
+                }).catch(
                         function (error) {
                             dispatch(failedUpdate(error));
+
                         }
                 );
     });
@@ -32,7 +45,7 @@ export const update = () => (dispatch) => {
 
 
 export const addPolitician = (...politician) => ({
-   type : ActionTypes.ADD_POLITICIAN,
+   type : ActionTypesCreate.ADD_POLITICIAN,
    payload : {
      ...politician
    }
@@ -41,26 +54,42 @@ export const addPolitician = (...politician) => ({
 
 
 
-
-export const failed = (error) => ({
-
-    type: ActionTypes.FAILED,
+export const updating = () => ({
+    type: ActionTypes.UPDATE_POLITICIAN,
     payload:
             {
-                politicians: initialState.politicians,
-                isLoading: false,
-                error: error
+                updated: false,
+                isLoading: true,
+                error: undefined
             }
-
 });
-export const failedUpdate = (error) => ({
 
+export const noAction = () => ({
     type: ActionTypes.FAILED,
     payload:
             {
-                politicians: [],
+                updated: false,
+                isLoading: false,
+                error: undefined
+            }
+});
+
+export const failedUpdate = (error) => ({
+    type: ActionTypes.FAILED,
+    payload:
+            {
+                updated: false,
                 isLoading: false,
                 error: error
             }
+});
 
+export const successUpdated = () => ({
+    type: ActionTypes.SUCCESS,
+    payload:
+            {
+                updated: true,
+                isLoading: false,
+                error: undefined
+            }
 });

@@ -1,16 +1,25 @@
 import React, {Component} from 'react';
-import {Breadcrumb, BreadcrumbItem, Button, Col, Label, Modal, ModalBody, ModalHeader, Row} from 'reactstrap';
+import {Alert, Breadcrumb, BreadcrumbItem, Button, Col, Label, Modal, ModalBody, ModalHeader, Row} from 'reactstrap';
 import Link from "react-router-dom/es/Link";
 import {GenderIcon} from "../../Politician/Presentational/RenderCardPolitician";
 import {PoliticianForm} from "../../Politician/Form/PoliticianForm";
 import {PoliticianModalForm} from "../../Politician/Form/PoliticianModalForm";
+import {Loading} from "../LoadingComponent";
 
 const PoliticianDetail = (props) => {
     const politicianKeysLength = Object.keys(props.politician).length;
     const firstListLength = politicianKeysLength / 2;
-    const handleClick = (comment, e) => {
-        e.preventDefault();
-        return props.action.removeComment(props.id)
+    if(props.updating.isLoading === true)
+    {
+        return <Loading/>
+    }
+    if(props.updating.error !== undefined)
+    {
+        return <Alert color="danger">{props.updating.error}</Alert>
+    }
+    if(props.updating.updated === true)
+    {
+        return <Alert color="primary">{props.updating.error}</Alert>
     }
     return (
 
@@ -50,17 +59,16 @@ const PoliticianDetail = (props) => {
                 <div className="row">
 
                 </div>
-                <PoliticianModalForm isOpen={false} addComment={props.actions.addPolitician}
+                <PoliticianModalForm update={props.update} updating={props.updating} isOpen={false} update={props.actions.update}
                                 politicianId={props.politician.id}
-                                defaultValues={Object.values(props.politician)}/>
+                                defaultValues={props.politician}/>
             </div>
     );
 };
 
 const RenderPoliticianPersonalData = (props) => {
-    const {title, value} = {...props}
+    const {title, value} = {...props};
 
-    console.log("personalData ", title);
     switch (title) {
         case "id" :
             return <div/>
