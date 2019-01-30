@@ -3,11 +3,10 @@ import {Politicians} from '../../../shared/politicians'
 import {initialState} from "../../reducers/politicianReducer";
 import axios from 'axios';
 
-export const fetchPoliticians = () => (dispatch) => {
-
+export const fetchPoliticians = (page = 1) => (dispatch) => {
     dispatch(dishesLoading());
     dispatch( async () =>{
-      return  axios.get("http://localhost/api-politicians/public/index.php?XDEBUG_SESSION_START=11556&page=2")
+      return  axios.get(`http://localhost/api-politicians/public/index.php?XDEBUG_SESSION_START=11556&page=${ page }`)
             .then((response) => {
                return dispatch(fetch(response.data))}
             );

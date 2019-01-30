@@ -25,7 +25,7 @@ export default class Header extends Component {
                       <NavBarMenu onClick = {this.toggleNavBar} isOpen={this.state.isNavOpen}/>
                   </div>
               </Navbar>
-              <Jumbotron>
+              <Jumbotron fluid>
               <div className="container">
                   <div className="row row-header">
                       <div className="col-12 col-sm-6">

@@ -25,7 +25,7 @@ export const mapStateToProps = (state) => {
 export const mapDispatchToProps = (dispatch) => ({
     addPolitician: (...politician) => dispatch(addPolitician(politician)),
     update: (...politician) => dispatch(update(politician)),
-    fetchPolitician: () => {dispatch(fetchPoliticians())
+    fetchPolitician: (page) => {dispatch(fetchPoliticians(page))
     }
 });
 
@@ -38,7 +38,16 @@ export class Main extends Component {
             ...props
         }
     }
+    handleClickPagination = (e,page)=> {
+        e.preventDefault();
+        console.log(this.props.pagination);
+        if(page !== this.props.pagination.page)
+        {
 
+            return this.props.fetchPolitician(page);
+        }
+
+    }
     componentDidMount() {
          this.props.fetchPolitician();
     }
@@ -54,7 +63,7 @@ export class Main extends Component {
             return (
                 <div>
                 <Home politicians={this.props.politicians} pagination={this.props.pagination}/>
-                <PaginationHandler  numItems={this.props.politicians.length} pagination={this.props.pagination}/>
+                <PaginationHandler onClick={this.handleClickPagination} numItems={this.props.politicians.length} pagination={this.props.pagination}/>
                    </div>);
         };
         const PoliticianRouter = ({match, actions}) => {

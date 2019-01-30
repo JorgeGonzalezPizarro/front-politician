@@ -1,10 +1,17 @@
 .nav-link  {
     color: #00c4a3 !important;
 }
+.jumbotron{
+    padding: 0 ;
+}
 a {
     color: #00c4a3 !important;
 }
-
+.spinner{
+    margin: 0 auto !important;
+    align-content: center !important;
+    text-align: center !important;
+}
 .jumbotron h1 , p {
     color: #2e6279;
 }

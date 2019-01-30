@@ -4,7 +4,7 @@ import {Loading} from "../Functional components/LoadingComponent";
 import {HomePresentational} from "./Presentational/HomePresentational";
 import {PaginationPresentational} from "./Presentational/PaginationPresentational";
 
-export const PaginationHandler = ({numItems,pagination}) => {
+export const PaginationHandler = ({numItems,pagination,onClick}) => {
     if(!pagination || numItems<pagination.itemsPerPage)
     {
         return <div/>
@@ -13,7 +13,7 @@ export const PaginationHandler = ({numItems,pagination}) => {
 
     return(
 
-        <PaginationPresentational page={pagination.page} itemsPerPage={pagination.itemsPerPage} totalPages={pagination.totalPages} totalItems={pagination.totalItems} pagination={pagination}/>
+        <PaginationPresentational onClick ={onClick} page={pagination.page} itemsPerPage={pagination.itemsPerPage} totalPages={pagination.totalPages} totalItems={pagination.totalItems} pagination={pagination}/>
     );
 };
 

@@ -4,7 +4,7 @@ import { NavbarBrand, NavbarToggler, Collapse, Nav, NavItem} from "reactstrap";
 import {NavLink} from "react-router-dom";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
-import {faHome, faInfo, faList, faAddressCard} from '@fortawesome/free-solid-svg-icons'
+import {faHome,  faList,  faUserPlus} from '@fortawesome/free-solid-svg-icons'
 import 'bootstrap-social/bootstrap-social.css';
 
 const NavBarMenu = (props) =>   {
@@ -28,7 +28,7 @@ const NavBarMenu = (props) =>   {
                         </NavItem>
                         <NavItem>
                             <NavLink className="nav-link" to="/create">
-                                <span><FontAwesomeIcon icon={faList}/>Add politician</span>
+                                <span><FontAwesomeIcon icon={faUserPlus}/>Add politician</span>
                             </NavLink>
                         </NavItem>
 
