@@ -19,7 +19,9 @@ export class RenderForm extends Component{
         console.log(props);
         this.state = {
             ...this.props.defaultValues ,
-            form : this.props.form
+           // form : this.props.form
+            valid : undefined ,
+
         }
 }
 
@@ -27,19 +29,46 @@ export class RenderForm extends Component{
 
     render() {
 
-
+        console.log("FPRM" , this.props.form);
         const handleSubmit = (event) => {
             event.preventDefault();
             return this.props.handleOnClick(this.state);
         }
       const handleInputChange =(event) =>{
+          event.preventDefault();
+          if(this.state.valid !== undefined)
+          {
+              if(this.state.valid ===false)
+              {
+                  alert("invalid");
+              }
+          }
             const target = event.target;
           const value = target.type === 'number' ? parseInt(target.value,10) : target.value;
-
+            handleValid(event);
             const name = target.name;
+            console.log("state" , this.state);
             this.setState({
                 [name]: value
             });
+
+        }
+      const handleValid =(event) =>{
+            const target = event.target;
+            const name = target.name;
+            const length =target.value.length;
+            alert(length);
+            if(this.props.form[name] !== undefined)
+            {
+                if(this.props.form[name].required === true)
+                {
+                    alert(this.props.form[name].required &&length === 0 )
+                    this.setState({valid : false});
+                    return length > 0;
+                }
+            }
+            return true;
+
 
         }
 
@@ -53,140 +82,23 @@ export class RenderForm extends Component{
                         </div>
                         <div className="col-12 col-md-9">
                             <Form onSubmit={handleSubmit}>
-                                <FormGroup row>
-                                    <Label htmlFor="titular" md={2}>First Name</Label>
-                                    <Col md={10}>
-                                        <Input type="text" id="titular" name="titular"
-                                               placeholder="titular"
-                                               value={this.state.titular}
-                                               onChange={handleInputChange}/>
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup row>
-                                    <Label htmlFor="partido" md={2}>partido</Label>
-                                    <Col md={10}>
-                                        <Input type="text" id="partido" name="partido"
-                                               placeholder="partido"
-                                               value={this.state.partido}
-                                               onChange={handleInputChange}/>
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup row>
-                                    <Label htmlFor="genero" md={2}>genero</Label>
-                                    <Col md={10}>
-                                        <Input type="text" id="genero" name="genero"
-                                               placeholder="genero"
-                                               value={this.state.genero}
-                                               onChange={handleInputChange}/>
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup row>
-                                    <Label htmlFor="cargo" md={2}>cargo</Label>
-                                    <Col md={10}>
-                                        <Input type="text" id="cargo" name="cargo"
-                                               placeholder="cargo"
-                                               value={this.state.cargo}
-                                               onChange={handleInputChange}/>
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup row>
-                                    <Label htmlFor="institucion" md={2}>institucion</Label>
-                                    <Col md={10}>
-                                        <Input type="text" id="institucion" name="institucion"
-                                               placeholder="institucion"
-                                               value={this.state.institucion}
-                                               onChange={handleInputChange}/>
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup row>
-                                    <Label htmlFor="ccaa" md={2}>ccaae</Label>
-                                    <Col md={10}>
-                                        <Input type="ccaa" id="ccaa" name="ccaa"
-                                               placeholder="ccaa"
-                                               value={this.state.ccaa}
-                                               onChange={this.handleInputChange}/>
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup row>
-                                    <Label htmlFor="sueldoBase" md={2}>Sueldo Base</Label>
-                                    <Col md={10}>
-                                        <Input type="number" id="sueldoBase" name="sueldoBase"
-                                               placeholder="Sueldo base"
-                                               value={this.state.sueldoBase}
-                                               onChange={handleInputChange}/>
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup row>
-                                    <Label htmlFor="complementosSueldo" md={2}>Complementos sueldo</Label>
-                                    <Col md={10}>
-                                        <Input type="text" id="complementosSueldo" name="complementosSueldo"
-                                               placeholder="Complementos sueldos"
-                                               value={this.state.complementosSueldo}
-                                               onChange={handleInputChange}/>
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup row>
-                                    <Label htmlFor="pagasExtrasSueldo" md={2}>Pagas extra sueldo</Label>
-                                    <Col md={10}>
-                                        <Input type="number" id="pagasExtrasSueldo" name="pagasExtrasSueldo"
-                                               placeholder="Pagas extra sueldo "
-                                               value={this.state.pagasExtrasSueldo}
-                                               onChange={handleInputChange}/>
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup row>
-                                    <Label htmlFor="otrasDietas" md={2}>Otras dietas </Label>
-                                    <Col md={10}>
-                                        <Input type="number" id="otrasDietas" name="otrasDietas"
-                                               placeholder="Otras dietas"
-                                               value={this.state.otrasDietas}
-                                               onChange={handleInputChange}/>
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup row>
-                                    <Label htmlFor="trieniosSueldo" md={2}>Trienios sueldo</Label>
-                                    <Col md={10}>
-                                        <Input type="number" id="trieniosSueldo" name="trieniosSueldo"
-                                               placeholder="Complementos sueldos"
-                                               value={this.state.trieniosSueldo}
-                                               onChange={handleInputChange}/>
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup row>
-                                    <Label htmlFor="retribucionAnual" md={2}>Complementos sueldo</Label>
-                                    <Col md={10}>
-                                        <Input type="number" id="retribucionAnual" name="retribucionAnual"
-                                               placeholder="Retribucion anual"
-                                               value={this.state.retribucionAnual}
-                                               onChange={handleInputChange}/>
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup row>
-                                    <Label htmlFor="retribucionMensual" md={2}>Retribucion mensual </Label>
-                                    <Col md={10}>
-                                        <Input type="number" id="retribucionMensual" name="retribucionMensual"
-                                               placeholder="Retribucion mensual"
-                                               value={this.state.retribucionMensual}
-                                               onChange={handleInputChange}/>
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup row>
-                                    <Label htmlFor="observaciones" md={2}>Observaciones</Label>
-                                    <Col md={10}>
-                                        <Input type="text" id="observaciones" name="observaciones"
-                                               placeholder="Observaciones"
-                                               value={this.state.observaciones}
-                                               onChange={handleInputChange}/>
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup row>
-                                    <Col md={{size: 10, offset: 2}}>
-                                        <Button type="submit" color="primary">
-                                            Confirm
-                                        </Button>
-                                    </Col>
-                                </FormGroup>
+                                {Object.entries(this.props.form).map(([input,value])=> {
+                                  return( <FormGroup row key={input}>
+                                        <Label htmlFor={` ${input}`} md={2}>{` ${value.label}`}</Label>
+                                        <Col md={10}>
+                                            <Input type={`${value.type}`} id={`${this.state[input]}`} name={`${input}`}
+                                                   placeholder={` ${value.label}`}
+                                                   value={`${this.state[input]}`}
+                                                   valid={handleValid.bind(this)}
+                                                   onChange={handleInputChange.bind(this)}/>
+                                        </Col>
+                                    </FormGroup>
+                                  )})}
+
+                                <Button>Confirmar</Button>
+
                             </Form>
+
                         </div>
                     </div>
                 </div>

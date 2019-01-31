@@ -20,16 +20,20 @@ export const create = (data) => (dispatch) => {
     });
 };
 export const update = (data) => (dispatch) => {
+    alert(JSON.stringify(data));
     const route = Routes.filter((route) => route.name==='update')[0];
+    alert(route.route);
+    alert(Object.assign({},data));
     dispatch(updating());
-    dispatch( async () =>{
+    dispatch(  () =>{
         return  axios.put(route.route ,Object.assign({},data), {
             headers: {
                 'Content-Type': 'application/json'
             }})
-                .then(async (response) => {
-                            alert(response);
-                            dispatch(fetchPoliticians());
+                .then( (response) => {
+                    dispatch(successUpdated());
+
+                    return dispatch(fetchPoliticians());
                 }).catch(
                         function (error) {
                             dispatch(failedUpdate(error));
