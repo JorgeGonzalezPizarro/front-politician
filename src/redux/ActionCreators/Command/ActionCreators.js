@@ -24,7 +24,6 @@ export const create = (data) => (dispatch) => {
 export const update = (data) => (dispatch) => {
     const route = Routes.filter((route) => route.name==='update')[0];
     dispatch(updating());
-    console.log(data);
     dispatch( async () =>{
         return  axios.put(route.route ,Object.assign({},data), {
             headers: {
