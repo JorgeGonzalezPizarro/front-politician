@@ -15,7 +15,6 @@ const PoliticianDetail = (props) => {
     {
         return <Alert color="danger">{props.updating.error}</Alert>
     }
-
     const politicianKeysLength = Object.keys(props.politician).length;
     const firstListLength = politicianKeysLength / 2;
     return (

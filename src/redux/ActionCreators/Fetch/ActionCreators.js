@@ -3,13 +3,13 @@ import {initialState} from "../../reducers/politicianReducer";
 import axios from 'axios';
 import {Routes} from "../../../shared/Politician/Routes";
 
-export const fetchPoliticians = () => (dispatch) => {
-
+export const fetchPoliticians = (page = 1) => (dispatch) => {
+    alert(page)
     dispatch(loading());
     dispatch( async () =>{
         const route = Routes.filter((route) => route.name==='fetch')[0];
 
-      return  axios.get(route.route)
+      return  axios.get(route.route.concat(`&page=${page}`))
             .then((response) => {
                return dispatch(fetch(response.data))}
             );

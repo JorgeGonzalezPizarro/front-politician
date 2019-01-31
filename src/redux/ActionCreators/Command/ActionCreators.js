@@ -30,7 +30,6 @@ export const update = (data) => (dispatch) => {
                 .then(async (response) => {
                             alert(response);
                             dispatch(fetchPoliticians());
-                             dispatch(successUpdated());
                 }).catch(
                         function (error) {
                             dispatch(failedUpdate(error));

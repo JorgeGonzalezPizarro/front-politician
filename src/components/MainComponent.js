@@ -19,7 +19,7 @@ export const mapStateToProps = (state) => {
 export const mapDispatchToProps = (dispatch) => ({
     create: (politician) => dispatch(create(politician)),
     update: (politician) => dispatch(update(politician)),
-    fetchPolitician: () => {dispatch(fetchPoliticians())
+    fetchPolitician: (page) => {dispatch(fetchPoliticians(page))
 
     }
 });
@@ -35,7 +35,6 @@ export class Main extends Component {
     }
     handleClickPagination = (e,page)=> {
         e.preventDefault();
-        console.log(this.props.pagination);
         if(page !== this.props.pagination.page)
         {
             return this.props.fetchPolitician(page);

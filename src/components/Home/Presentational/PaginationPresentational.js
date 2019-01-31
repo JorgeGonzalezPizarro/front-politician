@@ -8,13 +8,13 @@ export const PaginationPresentational = ({page,itemsPerPage,totalPages,totalItem
             <div className="row">
             <div className="col-12 col-md-10 m-1">
         <Pagination aria-label="Page navigation example" className="pagination justify-content-center">
-            <PaginationItem disabled={page === 1}>
+            <PaginationItem disabled={page === 1} onClick={ (e) => onClick(e,page-1)}>
                 <PaginationLink previous  />
             </PaginationItem>
             <RenderPagination totalPages={totalPages} activePage={page} numPage={page} onClick={onClick}/>
 
             <PaginationItem  disabled={page === totalPages}>
-                <PaginationLink next href="#"/>
+                <PaginationLink next onClick={ (e) => onClick(e,page+1)}/>
             </PaginationItem>
         </Pagination>
             </div>
