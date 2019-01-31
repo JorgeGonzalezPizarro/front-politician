@@ -46,9 +46,13 @@ export class Main extends Component {
 
 
     render() {
+        console.log(this.props.form)
         const actions = {
             addPolitician: this.props.create,
             update: this.props.update,
+        };
+        const form = {
+            form: this.props.form,
         };
 
         const HomePage = () => {
@@ -64,7 +68,7 @@ export class Main extends Component {
                 return <Loading/>
             }
             return (
-                <RenderPolitician form={this.props.form}   updating ={this.props.updating} politician={this.props.politicians.politicians.filter((politician, key) => politician.id === match.params.id)[0]} actions={actions}/>
+                <RenderPolitician form={form}   updating ={this.props.updating} politician={this.props.politicians.politicians.filter((politician, key) => politician.id === match.params.id)[0]} actions={actions}/>
             )
         };
         return (
@@ -76,7 +80,14 @@ export class Main extends Component {
                             politicians={this.props.politicians.politicians} pagination={this.props.pagination}/>
                     <Route exact path={"/politician/:id"}
                            component={({match}) => <PoliticianRouter match={match} actions={actions}/>}/>
-                    <Route exact path={'/create'}  component={() => <CreatePolitician form={this.props.form} actions={actions}/> }/>} />
+                    <Route exact path={'/create'}  component={() => {
+                        if(this.props.politicians.isLoading)
+                        {
+                            return <Loading/>
+                        }
+                       return <CreatePolitician form={this.props.form} actions={actions}/>
+                    }
+                    } />
                     <Redirect to={"/home"}/>
                 </Switch>
 
