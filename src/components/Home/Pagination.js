@@ -1,7 +1,4 @@
 import React from 'react'
-import {Card, CardBody, CardImg, CardSubtitle, CardText, CardTitle} from "reactstrap";
-import {Loading} from "../Functional components/LoadingComponent";
-import {HomePresentational} from "./Presentational/HomePresentational";
 import {PaginationPresentational} from "./Presentational/PaginationPresentational";
 
 export const PaginationHandler = ({numItems,pagination}) => {
@@ -9,12 +6,7 @@ export const PaginationHandler = ({numItems,pagination}) => {
     {
         return <div/>
     }
-
-
-    return(
-
-        <PaginationPresentational page={pagination.page} itemsPerPage={pagination.itemsPerPage} totalPages={pagination.totalPages} totalItems={pagination.totalItems} pagination={pagination}/>
-    );
+    return(<PaginationPresentational page={pagination.page} itemsPerPage={pagination.itemsPerPage} totalPages={pagination.totalPages} totalItems={pagination.totalItems} pagination={pagination}/>);
 };
 
 

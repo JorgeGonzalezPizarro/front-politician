@@ -1,5 +1,4 @@
-import * as ActionTypes from '../ActionTypes/Dishes/Actions'
-import {Politicians} from "../../shared/politicians";
+import * as ActionTypes from '../ActionTypes/Fetch/Actions'
 
 export  const initialState = {
     isLoading: true,

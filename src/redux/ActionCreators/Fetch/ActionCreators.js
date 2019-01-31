@@ -1,5 +1,4 @@
-import * as ActionTypes from '../../ActionTypes/Dishes/Actions'
-import {Politicians} from '../../../shared/politicians'
+import * as ActionTypes from '../../ActionTypes/Fetch/Actions'
 import {initialState} from "../../reducers/politicianReducer";
 import axios from 'axios';
 import {Routes} from "../../../shared/Politician/Routes";
@@ -25,6 +24,7 @@ export const loading = () => ({
         error: null,
         isLoading: initialState.isLoading,
         pagination: null,
+        form: null,
 
     }
 });
@@ -38,6 +38,7 @@ export const fetch = (politicians) => (
             error: null,
             politicians: politicians.politicians,
             pagination: politicians.meta,
+            form: politicians.form,
         }
     }
 );

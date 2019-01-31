@@ -1,4 +1,3 @@
-import {Loading} from "../../Functional components/LoadingComponent";
 import React from "react";
 import {RenderCardPolitician} from "../../Politician/Presentational/RenderCardPolitician";
 import {Breadcrumb, BreadcrumbItem} from "reactstrap";

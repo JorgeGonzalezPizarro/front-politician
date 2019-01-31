@@ -1,5 +1,4 @@
-import * as ActionTypes from '../ActionTypes/Comments/ActionUpdate'
-import {Politicians} from "../../shared/politicians";
+import * as ActionTypes from '../ActionTypes/Command/Actions'
 
 export  const initialState = {
     isLoading: false,

@@ -1,13 +1,9 @@
-import {Loading} from "../../Functional components/LoadingComponent";
 import React from "react";
-import {RenderCardPolitician} from "../../Politician/Presentational/RenderCardPolitician";
-import {Breadcrumb, BreadcrumbItem} from "reactstrap";
-import {Link} from "react-router-dom";
+
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 
 export const PaginationPresentational = ({page,itemsPerPage,totalPages,totalIetms}) => {
-    console.log(page);
-    console.log(totalPages);
+
     return(
         <div className="container">
             <div className="row">

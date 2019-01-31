@@ -15,7 +15,7 @@ export const PoliticianNormalForm = ({form}) => {
                         <BreadcrumbItem active>Create </BreadcrumbItem>
                     </Breadcrumb>
                     <div className="col-12">
-                        <h3>Create Politician Us</h3>
+                        <h3>Create Politician </h3>
                         <hr/>
                     </div>
                 </div>

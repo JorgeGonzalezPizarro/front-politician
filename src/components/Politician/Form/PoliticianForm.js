@@ -16,10 +16,10 @@ import {Loading} from "../../Functional components/LoadingComponent";
 export class RenderForm extends Component{
     constructor(props){
         super(props);
-
+        console.log(props);
         this.state = {
-            ...(this.props.defaultValues),
-
+            ...this.props.defaultValues ,
+            form : this.props.form
         }
 }
 
@@ -28,44 +28,26 @@ export class RenderForm extends Component{
     render() {
 
 
-         const  handleBlur = (field) => (evt) => {
-            this.setState({
-                touched: { ...this.state.touched, [field]: true },
-            });
-        }
-
-        const errors = {}
-        Object.keys(this.state).map((key) =>  {
-            if(this.state[key].length > 0 ) {
-
-               return errors[key] = ''
-            }
-          return  errors[key] = 'Required'
-        });
         const handleSubmit = (event) => {
             event.preventDefault();
-            return this.props.update(this.state);
+            return this.props.handleOnClick(this.state);
         }
       const handleInputChange =(event) =>{
             const target = event.target;
-            const value =  target.checked ;
+          const value = target.type === 'number' ? parseInt(target.value,10) : target.value;
 
             const name = target.name;
-
             this.setState({
                 [name]: value
             });
+
         }
 
 
-   const  validate = (value) => {
 
-       if (this.state[value].length === 0){
-           errors[value] = "Requiered";
-   }
 
-        return errors;
-    }
+
+
 
         return (
                 <div className="col-12 col-md-12">
@@ -81,11 +63,7 @@ export class RenderForm extends Component{
                                         <Input type="text" id="titular" name="titular"
                                                placeholder="titular"
                                                value={this.state.titular}
-                                               valid={errors['titular'] === ''}
-                                               invalid={errors.titular !== ''}
-                                               onBlur={handleBlur('titular')}
                                                onChange={handleInputChange}/>
-                                        <FormFeedback>{errors.titular}</FormFeedback>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -94,11 +72,7 @@ export class RenderForm extends Component{
                                         <Input type="text" id="partido" name="partido"
                                                placeholder="partido"
                                                value={this.state.partido}
-                                               valid={errors.partido === ''}
-                                               invalid={errors.partido !== ''}
-                                               onBlur={handleBlur('partido')}
                                                onChange={handleInputChange}/>
-                                        <FormFeedback>{errors.partido}</FormFeedback>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -107,11 +81,7 @@ export class RenderForm extends Component{
                                         <Input type="text" id="genero" name="genero"
                                                placeholder="genero"
                                                value={this.state.genero}
-                                               valid={errors.genero === ''}
-                                               invalid={errors.genero !== ''}
-                                               onBlur={handleBlur('genero')}
                                                onChange={handleInputChange}/>
-                                        <FormFeedback>{errors.genero}</FormFeedback>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -120,11 +90,7 @@ export class RenderForm extends Component{
                                         <Input type="text" id="cargo" name="cargo"
                                                placeholder="cargo"
                                                value={this.state.cargo}
-                                               valid={errors.cargo === ''}
-                                               invalid={errors.cargo !== ''}
-                                               onBlur={handleBlur('cargo')}
                                                onChange={handleInputChange}/>
-                                        <FormFeedback>{errors.cargo}</FormFeedback>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -133,11 +99,7 @@ export class RenderForm extends Component{
                                         <Input type="text" id="institucion" name="institucion"
                                                placeholder="institucion"
                                                value={this.state.institucion}
-                                               valid={errors.institucion === ''}
-                                               invalid={errors.institucion !== ''}
-                                               onBlur={handleBlur('institucion')}
                                                onChange={handleInputChange}/>
-                                        <FormFeedback>{errors.institucion}</FormFeedback>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -146,11 +108,7 @@ export class RenderForm extends Component{
                                         <Input type="ccaa" id="ccaa" name="ccaa"
                                                placeholder="ccaa"
                                                value={this.state.ccaa}
-                                               valid={errors.ccaa === ''}
-                                               invalid={errors.ccaa !== ''}
-                                               onBlur={handleBlur('ccaa')}
                                                onChange={this.handleInputChange}/>
-                                        <FormFeedback>{errors.ccaa}</FormFeedback>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -159,11 +117,7 @@ export class RenderForm extends Component{
                                         <Input type="number" id="sueldoBase" name="sueldoBase"
                                                placeholder="Sueldo base"
                                                value={this.state.sueldoBase}
-                                               valid={errors.sueldoBase === ''}
-                                               invalid={errors.sueldoBase !== ''}
-                                               onBlur={handleBlur('sueldoBase')}
                                                onChange={handleInputChange}/>
-                                        <FormFeedback>{errors.sueldoBase}</FormFeedback>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -172,11 +126,7 @@ export class RenderForm extends Component{
                                         <Input type="text" id="complementosSueldo" name="complementosSueldo"
                                                placeholder="Complementos sueldos"
                                                value={this.state.complementosSueldo}
-                                               valid={errors.complementosSueldo === ''}
-                                               invalid={errors.complementosSueldo !== ''}
-                                               onBlur={handleBlur('complementosSueldo')}
                                                onChange={handleInputChange}/>
-                                        <FormFeedback>{errors.complementosSueldo}</FormFeedback>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -185,11 +135,7 @@ export class RenderForm extends Component{
                                         <Input type="number" id="pagasExtrasSueldo" name="pagasExtrasSueldo"
                                                placeholder="Pagas extra sueldo "
                                                value={this.state.pagasExtrasSueldo}
-                                               valid={errors.pagasExtrasSueldo === ''}
-                                               invalid={errors.pagasExtrasSueldo !== ''}
-                                               onBlur={handleBlur('pagasExtrasSueldo')}
                                                onChange={handleInputChange}/>
-                                        <FormFeedback>{errors.pagasExtrasSueldo}</FormFeedback>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -198,11 +144,7 @@ export class RenderForm extends Component{
                                         <Input type="number" id="otrasDietas" name="otrasDietas"
                                                placeholder="Otras dietas"
                                                value={this.state.otrasDietas}
-                                               valid={errors.otrasDietas === ''}
-                                               invalid={errors.otrasDietas !== ''}
-                                               onBlur={handleBlur('otrasDietas')}
                                                onChange={handleInputChange}/>
-                                        <FormFeedback>{errors.otrasDietas}</FormFeedback>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -211,11 +153,7 @@ export class RenderForm extends Component{
                                         <Input type="number" id="trieniosSueldo" name="trieniosSueldo"
                                                placeholder="Complementos sueldos"
                                                value={this.state.trieniosSueldo}
-                                               valid={errors.trieniosSueldo === ''}
-                                               invalid={errors.trieniosSueldo !== ''}
-                                               onBlur={handleBlur('trieniosSueldo')}
                                                onChange={handleInputChange}/>
-                                        <FormFeedback>{errors.trieniosSueldo}</FormFeedback>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -224,11 +162,7 @@ export class RenderForm extends Component{
                                         <Input type="number" id="retribucionAnual" name="retribucionAnual"
                                                placeholder="Retribucion anual"
                                                value={this.state.retribucionAnual}
-                                               valid={errors.retribucionAnual === ''}
-                                               invalid={errors.retribucionAnual !== ''}
-                                               onBlur={handleBlur('retribucionAnual')}
                                                onChange={handleInputChange}/>
-                                        <FormFeedback>{errors.retribucionAnual}</FormFeedback>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -237,11 +171,7 @@ export class RenderForm extends Component{
                                         <Input type="number" id="retribucionMensual" name="retribucionMensual"
                                                placeholder="Retribucion mensual"
                                                value={this.state.retribucionMensual}
-                                               valid={errors.retribucionMensual === ''}
-                                               invalid={errors.retribucionMensual !== ''}
-                                               onBlur={handleBlur('retribucionMensual')}
                                                onChange={handleInputChange}/>
-                                        <FormFeedback>{errors.retribucionMensual}</FormFeedback>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -250,11 +180,7 @@ export class RenderForm extends Component{
                                         <Input type="text" id="observaciones" name="observaciones"
                                                placeholder="Observaciones"
                                                value={this.state.observaciones}
-                                               valid={errors.observaciones === ''}
-                                               invalid={errors.observaciones !== ''}
-                                               onBlur={handleBlur('observaciones')}
                                                onChange={handleInputChange}/>
-                                        <FormFeedback>{errors.observaciones}</FormFeedback>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>

@@ -1,14 +1,12 @@
-import React, {Component} from 'react';
-import {Alert, Breadcrumb, BreadcrumbItem, Button, Col, Label, Modal, ModalBody, ModalHeader, Row} from 'reactstrap';
+import React from 'react';
+import {Alert, Breadcrumb, BreadcrumbItem} from 'reactstrap';
 import Link from "react-router-dom/es/Link";
 import {GenderIcon} from "../../Politician/Presentational/RenderCardPolitician";
-import {PoliticianForm} from "../../Politician/Form/PoliticianForm";
 import {PoliticianModalForm} from "../../Politician/Form/PoliticianModalForm";
 import {Loading} from "../LoadingComponent";
 
 const PoliticianDetail = (props) => {
-    const politicianKeysLength = Object.keys(props.politician).length;
-    const firstListLength = politicianKeysLength / 2;
+    console.log(props);
     if(props.updating.isLoading === true)
     {
         return <Loading/>
@@ -17,10 +15,9 @@ const PoliticianDetail = (props) => {
     {
         return <Alert color="danger">{props.updating.error}</Alert>
     }
-    if(props.updating.updated === true)
-    {
-        return <Alert color="primary">{props.updating.error}</Alert>
-    }
+
+    const politicianKeysLength = Object.keys(props.politician).length;
+    const firstListLength = politicianKeysLength / 2;
     return (
 
             <div className="container">
@@ -59,7 +56,7 @@ const PoliticianDetail = (props) => {
                 <div className="row">
 
                 </div>
-                <PoliticianModalForm update={props.update} updating={props.updating} isOpen={false} update={props.actions.update}
+                <PoliticianModalForm form = {props.form} handleOnClick={props.update} updating={props.updating} isOpen={false} update={props.actions.update}
                                 politicianId={props.politician.id}
                                 defaultValues={props.politician}/>
             </div>
