@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
-
 import Header from './Header/Header';
 import {connect} from 'react-redux';
 import Footer from "./Footer/Footer";
 import {Switch, Route, Redirect, withRouter} from "react-router-dom";
 import Home from "./Home/Home";
 import {RenderPolitician} from "./Functional components/DishDetail/DishDetailRouter";
-
 import {create , update} from '../redux/ActionCreators/Command/ActionCreators';
 import {fetchPoliticians} from '../redux/ActionCreators/Fetch/ActionCreators';
 import {Loading} from "./Functional components/LoadingComponent";
@@ -18,11 +16,11 @@ export const mapStateToProps = (state) => {
     return {form: state.politicians.form , politicians: state.politicians, updating: state.updating, pagination: state.politicians.pagination}
 };
 
-
 export const mapDispatchToProps = (dispatch) => ({
     create: (politician) => dispatch(create(politician)),
     update: (politician) => dispatch(update(politician)),
     fetchPolitician: () => {dispatch(fetchPoliticians())
+
     }
 });
 
@@ -35,7 +33,14 @@ export class Main extends Component {
             ...props
         }
     }
-
+    handleClickPagination = (e,page)=> {
+        e.preventDefault();
+        console.log(this.props.pagination);
+        if(page !== this.props.pagination.page)
+        {
+            return this.props.fetchPolitician(page);
+        }
+    }
     componentDidMount() {
          this.props.fetchPolitician();
     }
@@ -51,7 +56,7 @@ export class Main extends Component {
             return (
                 <div>
                 <Home politicians={this.props.politicians} pagination={this.props.pagination}/>
-                <PaginationHandler  numItems={this.props.politicians.length} pagination={this.props.pagination}/>
+                <PaginationHandler onClick={this.handleClickPagination} numItems={this.props.politicians.length} pagination={this.props.pagination}/>
                    </div>);
         };
         const PoliticianRouter = ({match, actions}) => {

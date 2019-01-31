@@ -1,12 +1,8 @@
 import React, {Component} from 'react';
-import {Alert, Breadcrumb, BreadcrumbItem, Button, Col, Label, Modal, ModalBody, ModalHeader, Row} from 'reactstrap';
-import Link from "react-router-dom/es/Link";
+import { Modal, ModalBody, ModalHeader} from 'reactstrap';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPencilAlt} from "@fortawesome/free-solid-svg-icons";
-import {Control, Errors, LocalForm} from "react-redux-form";
-import {GenderIcon} from "../../Politician/Presentational/RenderCardPolitician";
 import {RenderForm} from "./PoliticianForm";
-import {Loading} from "../../Functional components/LoadingComponent";
 
 
 
