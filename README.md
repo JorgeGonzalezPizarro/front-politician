@@ -15,8 +15,8 @@ El fichero ./shared/Politician/Routes contiene las rutas necsarias para la conex
 
 ## Distribución componentes
 
-La distribución se ha realizado diviendo componentes funcionales de sus representaciones . 
+La distribución se ha realizado diviendo componentes funcionales de los presentacionales . 
 
-Maincomponent.js hace de container y almacena las rutas necesarias , es el componente de más alto nivel el cual pasa las "props" a los componentes hijos.
+Maincomponent.js es el container principal y conecta con redux , contiene la logica para pasar las props a los componentes hijos
 
 La carpeta redux contiene la store y llamadas necesarias al api.
