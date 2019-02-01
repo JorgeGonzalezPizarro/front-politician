@@ -1,11 +1,11 @@
-import React  from 'react'
+import React from 'react'
 import {RenderForm} from "../Form/PoliticianForm";
 import {PoliticianNormalForm} from "../Form/PoliticianNormalForm";
-import {Route} from "react-router-dom";
 
-export const CreatePolitician = ({actions , form}) => {
+export const CreatePolitician = ({actions, form, defaultValues}) => {
     console.log(form);
-    return <PoliticianNormalForm form={<RenderForm  form={form}  handleOnClick={actions.addPolitician} defaultValues={Object} /> } />
+    return <PoliticianNormalForm
+            form={<RenderForm form={form} handleOnClick={actions.addPolitician} defaultValues={defaultValues}/>}/>
 };
 
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import './Footer.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-
 import {library} from '@fortawesome/fontawesome-svg-core';
 import { faPhone, faFax , faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import 'bootstrap-social/bootstrap-social.css';

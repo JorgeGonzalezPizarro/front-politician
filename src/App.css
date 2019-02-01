@@ -7,6 +7,10 @@
 a {
     color: #00c4a3 !important;
 }
+.navbar-toggler{
+    border-color: #00c4a3 !important;
+    color: #512DA8;
+}
 .spinner{
     margin: 0 auto !important;
     align-content: center !important;

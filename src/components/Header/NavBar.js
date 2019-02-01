@@ -10,6 +10,7 @@ import 'bootstrap-social/bootstrap-social.css';
 const NavBarMenu = (props) =>   {
     console.log(props);
         return (
+                <div>
             <React.Fragment>
                 <NavbarToggler onClick={props.onClick}/>
                 <NavbarBrand className="mr-auto" href="/">Politicians</NavbarBrand>
@@ -36,7 +37,7 @@ const NavBarMenu = (props) =>   {
                     </Nav>
                 </Collapse>
             </React.Fragment>
-
+                </div>
 
         );
 

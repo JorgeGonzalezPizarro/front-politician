@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 import Header from './Header/Header';
 import {connect} from 'react-redux';
 import Footer from "./Footer/Footer";
-import {Switch, Route, Redirect, withRouter} from "react-router-dom";
+import {Redirect, Route, Switch, withRouter} from "react-router-dom";
 import Home from "./Home/Home";
-import {RenderPolitician} from "./Functional components/DishDetail/DishDetailRouter";
-import {create , update} from '../redux/ActionCreators/Command/ActionCreators';
+import {RenderPolitician} from "./Functional components/PoliticianDetail/PoliticianDetailRouter";
+import {create, update} from '../redux/ActionCreators/Command/ActionCreators';
 import {fetchPoliticians} from '../redux/ActionCreators/Fetch/ActionCreators';
 import {Loading} from "./Functional components/LoadingComponent";
 import {CreatePolitician} from "./Politician/Functional/CreatePolitician";
@@ -44,16 +44,19 @@ export class Main extends Component {
          this.props.fetchPolitician();
     }
 
-
     render() {
-        console.log(this.props.form)
+        const defaultValues = () => {
+            const defaultValues = {};
+            Object.keys(this.props.form).map((keys) => {
+                return defaultValues[keys] = '';
+            });
+            return defaultValues;
+        };
         const actions = {
             addPolitician: this.props.create,
             update: this.props.update,
         };
-        const form = {
-            form: this.props.form,
-        };
+
 
         const HomePage = () => {
             return (
@@ -68,7 +71,9 @@ export class Main extends Component {
                 return <Loading/>
             }
             return (
-                <RenderPolitician form={form}   updating ={this.props.updating} politician={this.props.politicians.politicians.filter((politician, key) => politician.id === match.params.id)[0]} actions={actions}/>
+                    <RenderPolitician form={this.props.form} updating={this.props.updating}
+                                      politician={this.props.politicians.politicians.filter((politician, key) => politician.id === match.params.id)[0]}
+                                      actions={actions}/>
             )
         };
         return (
@@ -85,7 +90,8 @@ export class Main extends Component {
                         {
                             return <Loading/>
                         }
-                       return <CreatePolitician form={this.props.form} actions={actions}/>
+                        return <CreatePolitician defaultValues={defaultValues()} form={this.props.form}
+                                                 actions={actions}/>
                     }
                     } />
                     <Redirect to={"/home"}/>

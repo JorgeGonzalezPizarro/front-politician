@@ -7,7 +7,6 @@ const HomeComponent = ({politicians , pagination}) => {
     {
         return <Loading/>
     }
-
     return(<HomePresentational politicians={politicians.politicians} pagination={pagination}/>
     );
 };

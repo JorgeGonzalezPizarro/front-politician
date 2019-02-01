@@ -1,7 +1,6 @@
 import React from "react";
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 
-
 export const PaginationPresentational = ({page,itemsPerPage,totalPages,totalItems,onClick}) => {
     return(
         <div className="container">
@@ -12,7 +11,6 @@ export const PaginationPresentational = ({page,itemsPerPage,totalPages,totalItem
                 <PaginationLink previous  />
             </PaginationItem>
             <RenderPagination totalPages={totalPages} activePage={page} numPage={page} onClick={onClick}/>
-
             <PaginationItem  disabled={page === totalPages}>
                 <PaginationLink next onClick={ (e) => onClick(e,page+1)}/>
             </PaginationItem>

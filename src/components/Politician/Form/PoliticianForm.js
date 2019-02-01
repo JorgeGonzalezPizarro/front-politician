@@ -1,15 +1,5 @@
 import React, {Component} from 'react';
-import {
-    Button,
-    Col,
-    FormGroup,
-    Label, Form,
-    Row,
-    Input, FormFeedback, Alert,
-} from 'reactstrap';
-import {Control, Errors, LocalForm} from "react-redux-form";
-import {Loading} from "../../Functional components/LoadingComponent";
-
+import {Button, Col, Form, FormFeedback, FormGroup, Input, Label,} from 'reactstrap';
 
 
 //export const RenderForm = ({defaultValues, politicianId, addPolitician}) => {
@@ -19,35 +9,58 @@ export class RenderForm extends Component{
         console.log(props);
         this.state = {
             ...this.props.defaultValues ,
-           // form : this.props.form
-            valid : undefined ,
 
         }
 }
 
 
+    componentDidMount() {
+        const errors = {};
+        Object.keys(this.state).map((key) => {
+            if (this.props.form[key] !== undefined) {
+                if (this.state[key] !== undefined) {
+                    if (this.state[key].length > 0) {
+                        errors[key] = ''
+                    }
+                }
+                if (this.props.form[key].required === true && this.state[key].length === 0) {
+                    errors[key] = 'Required'
+                }
+                errors[key] = '';
+            }
+        });
+
+        this.setState({...this.state, errors: errors})
+    }
 
     render() {
 
-        console.log("FPRM" , this.props.form);
+//        const handleValid  = (event) => {
+//            event.preventDefault();
+//            const target = event.target;
+//            const field = target.name;
+//            if (this.state.form[field] !== undefined ) {
+//                if(this.state.form[field].required ===true){
+//                    return errors[field] = "required"
+//
+//                }
+//
+//            }
+//            return errors;
+//        }
+
+
         const handleSubmit = (event) => {
             event.preventDefault();
             return this.props.handleOnClick(this.state);
         }
       const handleInputChange =(event) =>{
           event.preventDefault();
-          if(this.state.valid !== undefined)
-          {
-              if(this.state.valid ===false)
-              {
-                  alert("invalid");
-              }
-          }
+
             const target = event.target;
           const value = target.type === 'number' ? parseInt(target.value,10) : target.value;
             handleValid(event);
             const name = target.name;
-            console.log("state" , this.state);
             this.setState({
                 [name]: value
             });
@@ -57,19 +70,11 @@ export class RenderForm extends Component{
             const target = event.target;
             const name = target.name;
             const length =target.value.length;
-            alert(length);
-            if(this.props.form[name] !== undefined)
+          if (this.state.errors[name] !== undefined)
             {
-                if(this.props.form[name].required === true)
-                {
-                    alert(this.props.form[name].required &&length === 0 )
-                    this.setState({valid : false});
-                    return length > 0;
-                }
+                return false;
             }
             return true;
-
-
         }
 
 
@@ -78,7 +83,7 @@ export class RenderForm extends Component{
                 <div className="col-12 col-md-12">
                     <div className="row row-content">
                         <div className="col-12">
-                            <h3>Update</h3>
+                            <h3>Form</h3>
                         </div>
                         <div className="col-12 col-md-9">
                             <Form onSubmit={handleSubmit}>
@@ -88,9 +93,10 @@ export class RenderForm extends Component{
                                         <Col md={10}>
                                             <Input type={`${value.type}`} id={`${this.state[input]}`} name={`${input}`}
                                                    placeholder={` ${value.label}`}
-                                                   value={`${this.state[input]}`}
-                                                   valid={handleValid.bind(this)}
+                                                   value={`${this.state[input] === undefined ? '' : this.state[input]}`}
                                                    onChange={handleInputChange.bind(this)}/>
+                                            <FormFeedback> </FormFeedback>
+
                                         </Col>
                                     </FormGroup>
                                   )})}

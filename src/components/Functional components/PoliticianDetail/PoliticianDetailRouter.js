@@ -1,6 +1,5 @@
-import React  from 'react'
+import React from 'react'
 import PoliticianDetail from "./PoliticianDetail";
-
 export const RenderPolitician = ({politician,actions,updating , form}) => {
     console.log('from renderp' , actions);
     console.log('from renderp' , form);

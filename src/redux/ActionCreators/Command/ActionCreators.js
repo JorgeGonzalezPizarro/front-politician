@@ -1,9 +1,8 @@
 import * as ActionTypesCreate from '../../ActionTypes/Command/Actions'
 import * as ActionTypes from '../../ActionTypes/Command/Actions'
 import {fetch, fetchPoliticians} from "../Fetch/ActionCreators";
-import axios from 'axios';
 import {Routes} from "../../../shared/Politician/Routes";
-
+import axios  from 'axios'
 export const create = (data) => (dispatch) => {
     const route = Routes.filter((route) => route.name==='create')[0];
     dispatch( async () =>{
@@ -20,10 +19,7 @@ export const create = (data) => (dispatch) => {
     });
 };
 export const update = (data) => (dispatch) => {
-    alert(JSON.stringify(data));
     const route = Routes.filter((route) => route.name==='update')[0];
-    alert(route.route);
-    alert(Object.assign({},data));
     dispatch(updating());
     dispatch(  () =>{
         return  axios.put(route.route ,Object.assign({},data), {

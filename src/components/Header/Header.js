@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
-import {Jumbotron, Navbar, NavbarBrand , NavbarToggler} from "reactstrap";
-import {BrowserRouter , Link , NavLink } from "react-router-dom";
+import {Jumbotron, Navbar} from "reactstrap";
 import NavBarMenu from './NavBar';
 export default class Header extends Component {
     constructor (props){

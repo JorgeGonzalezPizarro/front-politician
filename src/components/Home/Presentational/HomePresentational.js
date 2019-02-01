@@ -5,7 +5,6 @@ import {Link} from "react-router-dom";
 
 export const HomePresentational = (politicians) => {
     return(
-
             <div className="container">
                 <div className="row">
                     <Breadcrumb>
